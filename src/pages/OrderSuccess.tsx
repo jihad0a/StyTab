@@ -87,7 +87,7 @@ export default function OrderSuccess() {
             <Truck className="text-primary" />
             <div className="flex-1">
               <p className="text-[10px] uppercase tracking-widest text-on-surface/40">Estimated Delivery</p>
-              <p className="text-sm font-bold text-on-surface">Oct 24 — Oct 26, 2024</p>
+              <p className="text-sm font-bold text-on-surface">Apr 14 — Apr 16, 2026</p>
             </div>
           </motion.div>
         </motion.div>

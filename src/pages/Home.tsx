@@ -258,7 +258,7 @@ export default function Home() {
               transition={{ delay: 0.8, duration: 0.8 }}
               className="absolute -bottom-8 -left-8 w-48 h-48 bg-primary rounded-2xl p-6 flex flex-col justify-end shadow-xl hidden md:flex"
             >
-              <div className="text-on-primary font-headline font-black text-4xl leading-none uppercase">EST.<br />2024</div>
+              <div className="text-on-primary font-headline font-black text-4xl leading-none uppercase">EST.<br />2026</div>
             </motion.div>
           </motion.div>
         </div>

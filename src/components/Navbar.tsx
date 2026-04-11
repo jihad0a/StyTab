@@ -25,12 +25,14 @@ export default function Navbar() {
     <>
       <header className="fixed top-0 z-50 w-full h-[60px] flex justify-between items-center px-6 bg-surface/80 backdrop-blur-xl border-b border-primary/20 shadow-sm">
         <div className="flex items-center gap-4">
-          <button 
+          <motion.button 
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             onClick={() => setIsMenuOpen(true)}
             className="text-on-surface/70 hover:text-primary transition-all duration-300 cursor-pointer active:scale-95"
           >
             <Menu size={24} />
-          </button>
+          </motion.button>
         </div>
         
         <Link to="/" className="text-2xl font-black text-on-surface tracking-[-0.05em] font-headline uppercase">

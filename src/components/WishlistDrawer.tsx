@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { X, Trash2, Heart, ShoppingBag } from 'lucide-react';
 import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
@@ -41,7 +41,11 @@ export default function WishlistDrawer({ onClose }: WishlistDrawerProps) {
 
         <div className="flex-1 overflow-y-auto px-6 py-8 space-y-8 no-scrollbar">
           {wishlist.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-50">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-50"
+            >
               <Heart size={48} />
               <p className="font-headline font-bold uppercase tracking-widest">Your wishlist is empty</p>
               <button 
@@ -50,41 +54,53 @@ export default function WishlistDrawer({ onClose }: WishlistDrawerProps) {
               >
                 Explore Archive
               </button>
-            </div>
+            </motion.div>
           ) : (
-            wishlist.map((product) => (
-              <div key={product.id} className="flex gap-4 items-start group">
-                <div className="w-20 h-24 flex-shrink-0 bg-surface-container-high rounded-md overflow-hidden">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
-                </div>
-                <div className="flex-1 flex flex-col gap-1">
-                  <div className="flex justify-between items-start">
-                    <Link to={`/product/${product.id}`} onClick={onClose}>
-                      <h3 className="font-bold text-sm tracking-tight text-on-surface uppercase hover:text-primary transition-colors">{product.name}</h3>
-                    </Link>
-                    <button 
-                      onClick={() => removeFromWishlist(product.id)}
-                      className="text-on-surface/40 hover:text-red-500 transition-colors"
-                    >
-                      <Trash2 size={16} />
-                    </button>
+            <AnimatePresence mode="popLayout">
+              {wishlist.map((product, i) => (
+                <motion.div 
+                  key={product.id}
+                  layout
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="flex gap-4 items-start group"
+                >
+                  <div className="w-20 h-24 flex-shrink-0 bg-surface-container-high rounded-md overflow-hidden">
+                    <img src={product.image} alt={product.name} className="w-full h-full object-cover transition-all group-hover:scale-110" />
                   </div>
-                  <p className="text-[10px] font-bold text-on-surface/40 uppercase tracking-widest">{product.category}</p>
-                  <div className="flex justify-between items-end mt-4">
-                    <span className="font-headline font-bold text-primary">${product.price}</span>
-                    <button 
-                      onClick={() => {
-                        addToCart(product, product.sizes[0]);
-                        removeFromWishlist(product.id);
-                      }}
-                      className="bg-primary text-on-primary px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-md hover:brightness-110 active:scale-95 transition-all"
-                    >
-                      MOVE TO CART
-                    </button>
+                  <div className="flex-1 flex flex-col gap-1">
+                    <div className="flex justify-between items-start">
+                      <Link to={`/product/${product.id}`} onClick={onClose}>
+                        <h3 className="font-bold text-sm tracking-tight text-on-surface uppercase hover:text-primary transition-colors">{product.name}</h3>
+                      </Link>
+                      <button 
+                        onClick={() => removeFromWishlist(product.id)}
+                        className="text-on-surface/40 hover:text-red-500 transition-colors"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                    <p className="text-[10px] font-bold text-on-surface/40 uppercase tracking-widest">{product.category}</p>
+                    <div className="flex justify-between items-end mt-4">
+                      <span className="font-headline font-bold text-primary">${product.price}</span>
+                      <motion.button 
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => {
+                          addToCart(product, product.sizes[0]);
+                          removeFromWishlist(product.id);
+                        }}
+                        className="bg-primary text-on-primary px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-md hover:brightness-110 transition-all"
+                      >
+                        MOVE TO CART
+                      </motion.button>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))
+                </motion.div>
+              ))}
+            </AnimatePresence>
           )}
         </div>
 

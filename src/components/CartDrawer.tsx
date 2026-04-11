@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { X, Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
 import { useCart, products } from '../context/CartContext';
 import { Link } from 'react-router-dom';
@@ -39,7 +39,11 @@ export default function CartDrawer({ onClose }: CartDrawerProps) {
 
         <div className="flex-1 overflow-y-auto px-6 py-8 space-y-8 no-scrollbar">
           {cart.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-50">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-50"
+            >
               <ShoppingBag size={48} />
               <p className="font-headline font-bold uppercase tracking-widest">Your cart is empty</p>
               <button 
@@ -48,62 +52,98 @@ export default function CartDrawer({ onClose }: CartDrawerProps) {
               >
                 Start Shopping
               </button>
-            </div>
+            </motion.div>
           ) : (
-            cart.map((item) => (
-              <div key={`${item.id}-${item.selectedSize}`} className="flex gap-4 items-start group">
-                <div className="w-20 h-24 flex-shrink-0 bg-surface-container-high rounded-md overflow-hidden">
-                  <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-all duration-500" />
-                </div>
-                <div className="flex-1 flex flex-col gap-1">
-                  <div className="flex justify-between items-start">
-                    <h3 className="font-bold text-sm tracking-tight text-on-surface uppercase">{item.name}</h3>
-                    <button 
-                      onClick={() => removeFromCart(item.id, item.selectedSize)}
-                      className="text-on-surface/40 hover:text-red-500 transition-colors"
-                    >
-                      <Trash2 size={16} />
-                    </button>
+            <AnimatePresence mode="popLayout">
+              {cart.map((item, i) => (
+                <motion.div 
+                  key={`${item.id}-${item.selectedSize}`}
+                  layout
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="flex gap-4 items-start group"
+                >
+                  <div className="w-20 h-24 flex-shrink-0 bg-surface-container-high rounded-md overflow-hidden">
+                    <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110" />
                   </div>
-                  <p className="text-[10px] font-bold text-on-surface/40 uppercase tracking-widest">Size: {item.selectedSize}</p>
-                  <div className="flex justify-between items-end mt-2">
-                    <div className="flex items-center bg-surface-container-high rounded-full px-2 py-1 gap-3">
+                  <div className="flex-1 flex flex-col gap-1">
+                    <div className="flex justify-between items-start">
+                      <h3 className="font-bold text-sm tracking-tight text-on-surface uppercase">{item.name}</h3>
                       <button 
-                        onClick={() => updateQuantity(item.id, item.selectedSize, -1)}
-                        className="text-on-surface/60 hover:text-primary transition-colors"
+                        onClick={() => removeFromCart(item.id, item.selectedSize)}
+                        className="text-on-surface/40 hover:text-red-500 transition-colors"
                       >
-                        <Minus size={12} />
-                      </button>
-                      <span className="text-xs font-bold w-4 text-center">{item.quantity}</span>
-                      <button 
-                        onClick={() => updateQuantity(item.id, item.selectedSize, 1)}
-                        className="text-on-surface/60 hover:text-primary transition-colors"
-                      >
-                        <Plus size={12} />
+                        <Trash2 size={16} />
                       </button>
                     </div>
-                    <span className="font-headline font-bold text-primary">${item.price * item.quantity}</span>
+                    <p className="text-[10px] font-bold text-on-surface/40 uppercase tracking-widest">Size: {item.selectedSize}</p>
+                    <div className="flex justify-between items-end mt-2">
+                      <div className="flex items-center bg-surface-container-high rounded-full px-2 py-1 gap-3">
+                        <button 
+                          onClick={() => updateQuantity(item.id, item.selectedSize, -1)}
+                          className="text-on-surface/60 hover:text-primary transition-colors active:scale-125"
+                        >
+                          <Minus size={12} />
+                        </button>
+                        <motion.span 
+                          key={item.quantity}
+                          initial={{ scale: 1.2, color: 'var(--color-primary)' }}
+                          animate={{ scale: 1, color: 'inherit' }}
+                          className="text-xs font-bold w-4 text-center"
+                        >
+                          {item.quantity}
+                        </motion.span>
+                        <button 
+                          onClick={() => updateQuantity(item.id, item.selectedSize, 1)}
+                          className="text-on-surface/60 hover:text-primary transition-colors active:scale-125"
+                        >
+                          <Plus size={12} />
+                        </button>
+                      </div>
+                      <motion.span 
+                        key={item.price * item.quantity}
+                        initial={{ scale: 1.1 }}
+                        animate={{ scale: 1 }}
+                        className="font-headline font-bold text-primary"
+                      >
+                        ${item.price * item.quantity}
+                      </motion.span>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))
+                </motion.div>
+              ))}
+            </AnimatePresence>
           )}
 
           {cart.length > 0 && (
-            <div className="pt-6 border-t border-on-surface/5">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="pt-6 border-t border-on-surface/5"
+            >
               <p className="text-[10px] font-bold tracking-widest text-on-surface/40 uppercase mb-4">Complete the look</p>
               <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
-                {products.slice(0, 3).map(p => (
-                  <Link key={p.id} to={`/product/${p.id}`} onClick={onClose} className="w-24 flex-shrink-0 group">
-                    <div className="aspect-square bg-surface-container-high rounded mb-2 overflow-hidden">
-                      <img src={p.image} className="w-full h-full object-cover transition-all" />
-                    </div>
-                    <p className="text-[9px] font-bold uppercase truncate text-on-surface">{p.name}</p>
-                    <p className="text-[9px] text-primary font-bold">${p.price}</p>
-                  </Link>
+                {products.slice(0, 3).map((p, i) => (
+                  <motion.div
+                    key={p.id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.4 + i * 0.1 }}
+                  >
+                    <Link key={p.id} to={`/product/${p.id}`} onClick={onClose} className="w-24 flex-shrink-0 group block">
+                      <div className="aspect-square bg-surface-container-high rounded mb-2 overflow-hidden">
+                        <img src={p.image} className="w-full h-full object-cover transition-all group-hover:scale-110" />
+                      </div>
+                      <p className="text-[9px] font-bold uppercase truncate text-on-surface group-hover:text-primary transition-colors">{p.name}</p>
+                      <p className="text-[9px] text-primary font-bold">${p.price}</p>
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           )}
         </div>
 

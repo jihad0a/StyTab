@@ -79,13 +79,13 @@ export default function MenuDrawer({ onClose }: MenuDrawerProps) {
 
         <div className="pt-8 mt-auto flex flex-col space-y-8">
           <div className="flex items-center space-x-8">
-            <a href="#" className="text-on-surface/40 hover:text-primary transition-colors"><Instagram size={24} /></a>
-            <a href="#" className="text-on-surface/40 hover:text-primary transition-colors"><Facebook size={24} /></a>
-            <a href="#" className="text-on-surface/40 hover:text-primary transition-colors"><MessageCircle size={24} /></a>
+            <motion.a whileHover={{ scale: 1.2, rotate: 5, color: '#E1306C' }} href="#" className="text-on-surface/40 transition-colors"><Instagram size={24} /></motion.a>
+            <motion.a whileHover={{ scale: 1.2, rotate: -5, color: '#1877F2' }} href="#" className="text-on-surface/40 transition-colors"><Facebook size={24} /></motion.a>
+            <motion.a whileHover={{ scale: 1.2, rotate: 5, color: '#25D366' }} href="#" className="text-on-surface/40 transition-colors"><MessageCircle size={24} /></motion.a>
           </div>
           
           <div className="space-y-4">
-            <p className="font-body text-[10px] tracking-[0.2em] text-on-surface/40 uppercase">© 2024 StyTab STREETWEAR. ALL RIGHTS RESERVED.</p>
+            <p className="font-body text-[10px] tracking-[0.2em] text-on-surface/40 uppercase">© 2026 StyTab STREETWEAR. ALL RIGHTS RESERVED.</p>
           </div>
         </div>
       </motion.div>
