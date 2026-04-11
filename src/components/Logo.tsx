@@ -6,14 +6,14 @@ interface LogoProps {
 }
 
 export default function Logo({ className = "", height = 32 }: LogoProps) {
-  // Aspect ratio is roughly 3:1 based on the design
-  const width = height * 3.2;
+  // Aspect ratio is roughly 3.3:1 based on the design
+  const width = height * 3.33;
   
   return (
     <svg 
       width={width} 
       height={height} 
-      viewBox="0 0 180 60" 
+      viewBox="0 0 200 60" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
       className={`${className} select-none`}
@@ -24,7 +24,7 @@ export default function Logo({ className = "", height = 32 }: LogoProps) {
         </filter>
       </defs>
       
-      {/* S */}
+      {/* St */}
       <text 
         x="5" 
         y="45" 
@@ -34,18 +34,18 @@ export default function Logo({ className = "", height = 32 }: LogoProps) {
         fill="#F5F5F0" 
         stroke="#131313" 
         strokeWidth="2"
-        letterSpacing="-2"
+        letterSpacing="-1"
         filter="url(#shadow)"
       >
-        S
+        St
       </text>
       
-      {/* Red Dot - positioned between S and t */}
-      <circle cx="42" cy="32" r="6.5" fill="#EF4444" stroke="#131313" strokeWidth="1.5" />
+      {/* Red Dot - positioned between St and yTab */}
+      <circle cx="62" cy="32" r="6.5" fill="#EF4444" stroke="#131313" strokeWidth="1.5" />
       
-      {/* tyTab */}
+      {/* yTab */}
       <text 
-        x="52" 
+        x="67" 
         y="45" 
         fontFamily="Epilogue, sans-serif" 
         fontSize="48" 
@@ -53,10 +53,10 @@ export default function Logo({ className = "", height = 32 }: LogoProps) {
         fill="#F5F5F0" 
         stroke="#131313" 
         strokeWidth="2"
-        letterSpacing="-3"
+        letterSpacing="-1.5"
         filter="url(#shadow)"
       >
-        tyTab
+        yTab
       </text>
     </svg>
   );

@@ -89,9 +89,6 @@ export default function Home() {
             <Link to="/products" className="bg-primary text-on-primary px-8 py-3.5 sm:py-3 rounded-full text-center font-headline font-bold text-xs tracking-wider uppercase transition-all hover:brightness-110 active:scale-95 shadow-lg">
               SHOP NOW
             </Link>
-            <Link to="/about" className="bg-black text-white px-6 py-3.5 sm:py-3 rounded-full text-center font-headline font-bold text-xs tracking-wider uppercase transition-all hover:bg-black/80 active:scale-95 shadow-lg">
-              VIEW LOOKBOOK
-            </Link>
           </motion.div>
           
           <div className="flex gap-2 mt-8">
