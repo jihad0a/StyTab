@@ -41,33 +41,39 @@ export default function MenuDrawer({ onClose }: MenuDrawerProps) {
         </div>
 
         <nav className="flex flex-col flex-grow divide-y divide-primary/10">
-          {navLinks.map((link) => (
-            <Link
+          {navLinks.map((link, i) => (
+            <motion.div
               key={link.name}
-              to={link.path}
-              onClick={(e) => {
-                if (link.isWishlist) {
-                  e.preventDefault();
-                  onClose();
-                  window.dispatchEvent(new CustomEvent('open-wishlist'));
-                } else {
-                  onClose();
-                }
-              }}
-              className="group py-6 flex items-center justify-between text-on-surface/60 hover:text-primary hover:pl-4 transition-all duration-500"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.1 }}
             >
-              <div className="flex items-center space-x-4">
-                <link.icon size={24} />
-                <span className="font-headline text-2xl font-extrabold uppercase leading-none tracking-tight">{link.name}</span>
-              </div>
-              <motion.span 
-                initial={{ opacity: 0, x: -10 }}
-                whileHover={{ opacity: 1, x: 0 }}
-                className="text-primary"
+              <Link
+                to={link.path}
+                onClick={(e) => {
+                  if (link.isWishlist) {
+                    e.preventDefault();
+                    onClose();
+                    window.dispatchEvent(new CustomEvent('open-wishlist'));
+                  } else {
+                    onClose();
+                  }
+                }}
+                className="group py-6 flex items-center justify-between text-on-surface/60 hover:text-primary hover:pl-4 transition-all duration-500"
               >
-                →
-              </motion.span>
-            </Link>
+                <div className="flex items-center space-x-4">
+                  <link.icon size={24} />
+                  <span className="font-headline text-2xl font-extrabold uppercase leading-none tracking-tight">{link.name}</span>
+                </div>
+                <motion.span 
+                  initial={{ opacity: 0, x: -10 }}
+                  whileHover={{ opacity: 1, x: 0 }}
+                  className="text-primary"
+                >
+                  →
+                </motion.span>
+              </Link>
+            </motion.div>
           ))}
         </nav>
 

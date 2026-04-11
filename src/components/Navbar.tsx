@@ -38,28 +38,54 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-4">
-          <button 
+          <motion.button 
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             onClick={() => setIsWishlistOpen(true)}
-            className="relative text-on-surface/70 hover:text-primary transition-all duration-300 cursor-pointer active:scale-95 group"
+            className="relative text-on-surface/70 hover:text-primary transition-all duration-300 cursor-pointer group"
           >
-            <Heart size={24} className={wishlist.length > 0 ? 'text-primary' : ''} fill={wishlist.length > 0 ? 'currentColor' : 'none'} />
+            <motion.div
+              key={wishlist.length}
+              initial={{ scale: 1 }}
+              animate={{ scale: [1, 1.4, 1] }}
+              transition={{ duration: 0.3 }}
+            >
+              <Heart size={24} className={wishlist.length > 0 ? 'text-primary' : ''} fill={wishlist.length > 0 ? 'currentColor' : 'none'} />
+            </motion.div>
             {wishlist.length > 0 && (
-              <span className="absolute -top-1 -right-1 bg-primary text-on-primary text-[8px] font-bold w-3 h-3 flex items-center justify-center rounded-full">
+              <motion.span 
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="absolute -top-1 -right-1 bg-primary text-on-primary text-[8px] font-bold w-3 h-3 flex items-center justify-center rounded-full"
+              >
                 {wishlist.length}
-              </span>
+              </motion.span>
             )}
-          </button>
-          <button 
+          </motion.button>
+          <motion.button 
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             onClick={() => setIsCartOpen(true)}
-            className="relative active:scale-95 duration-150 cursor-pointer group"
+            className="relative duration-150 cursor-pointer group"
           >
-            <ShoppingCart size={24} className="text-on-surface/70 group-hover:text-primary" />
+            <motion.div
+              key={totalItems}
+              initial={{ scale: 1 }}
+              animate={{ scale: [1, 1.4, 1] }}
+              transition={{ duration: 0.3 }}
+            >
+              <ShoppingCart size={24} className="text-on-surface/70 group-hover:text-primary" />
+            </motion.div>
             {totalItems > 0 && (
-              <span className="absolute -top-2 -right-2 bg-primary text-on-primary text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
+              <motion.span 
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="absolute -top-2 -right-2 bg-primary text-on-primary text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
+              >
                 {totalItems}
-              </span>
+              </motion.span>
             )}
-          </button>
+          </motion.button>
         </div>
       </header>
 

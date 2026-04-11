@@ -77,22 +77,45 @@ export default function Products() {
       <div className="space-y-12">
         {/* Title & Stats */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
             <div className="w-1 h-8 bg-primary mb-2" />
             <h1 className="font-headline text-3xl md:text-5xl font-black tracking-tight md:tracking-tighter uppercase leading-none text-on-surface">
               {getPageTitle()}
             </h1>
-          </div>
-          <div className="flex items-center gap-3 text-on-surface/40 text-[10px] font-black tracking-[0.2em] uppercase">
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="flex items-center gap-3 text-on-surface/40 text-[10px] font-black tracking-[0.2em] uppercase"
+          >
             <span>{filteredProducts.length} Products Found</span>
-          </div>
+          </motion.div>
         </div>
 
         {/* Categories Bar */}
-        <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 md:mx-0 md:px-0">
-          {categories.map(cat => (
-            <button
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="flex gap-2 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 md:mx-0 md:px-0"
+        >
+          {categories.map((cat, i) => (
+            <motion.button
               key={cat}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => {
                 setActiveCategory(cat);
                 setVisibleProducts(6);
@@ -100,12 +123,18 @@ export default function Products() {
               className={`flex-none px-6 py-2 rounded-full text-[10px] font-black font-headline tracking-widest uppercase transition-all border ${activeCategory === cat ? 'bg-primary border-primary text-on-primary' : 'bg-surface border-on-surface/10 text-on-surface/60 hover:border-primary hover:text-primary'}`}
             >
               {cat}
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Search Bar */}
-        <div className="group max-w-2xl">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="group max-w-2xl"
+        >
           <div className="relative flex items-center">
             <Search className="absolute left-4 text-on-surface/40 group-focus-within:text-primary transition-colors" size={20} />
             <input 
@@ -116,14 +145,28 @@ export default function Products() {
               type="text" 
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
-          {displayedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <motion.div 
+          layout
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12"
+        >
+          <AnimatePresence mode="popLayout">
+            {displayedProducts.map((product, i) => (
+              <motion.div
+                key={product.id}
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
+              >
+                <ProductCard product={product} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
         {filteredProducts.length === 0 && (
           <div className="py-20 text-center opacity-40">

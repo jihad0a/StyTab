@@ -20,7 +20,9 @@ export const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             src={product.image} 
           />
         </Link>
-        <button 
+        <motion.button 
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           onClick={(e) => {
             e.preventDefault();
             toggleWishlist(product);
@@ -28,7 +30,7 @@ export const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           className={`absolute top-4 right-4 bg-surface-container-low/80 backdrop-blur-md p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-sm hover:text-primary ${isWishlisted ? 'opacity-100 text-primary' : ''}`}
         >
           <Heart size={20} fill={isWishlisted ? "currentColor" : "none"} />
-        </button>
+        </motion.button>
       </div>
       <div className="mt-6 space-y-2">
         <div className="flex justify-between items-start">
@@ -43,18 +45,26 @@ export const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           <span className="text-primary font-headline font-black text-xl">${product.price}</span>
         </div>
         <div className="flex gap-2 pt-2">
-          <button 
+          <motion.button 
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => addToCart(product, product.sizes[0])}
             className="flex-1 border border-primary text-primary px-4 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-colors"
           >
             ADD TO CART
-          </button>
-          <Link 
-            to={`/product/${product.id}`}
-            className="flex-1 bg-primary text-on-primary px-4 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:brightness-110 transition-all shadow-md text-center"
+          </motion.button>
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="flex-1"
           >
-            VIEW
-          </Link>
+            <Link 
+              to={`/product/${product.id}`}
+              className="block w-full bg-primary text-on-primary px-4 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:brightness-110 transition-all shadow-md text-center"
+            >
+              VIEW
+            </Link>
+          </motion.div>
         </div>
       </div>
     </div>

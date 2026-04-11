@@ -82,62 +82,124 @@ export default function Collection() {
       </section>
 
       {/* Product Grid */}
-      <section className="px-6 max-w-7xl mx-auto">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        className="px-6 max-w-7xl mx-auto"
+      >
         <div className="flex justify-between items-end mb-12">
-          <div className="space-y-2">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="space-y-2"
+          >
             <h2 className="font-headline text-2xl font-black uppercase tracking-tight">THE COLLECTION</h2>
-            <div className="w-12 h-1 bg-primary" />
-          </div>
-          <div className="text-[10px] font-black tracking-[0.2em] text-on-surface/40 uppercase">
+            <motion.div 
+              initial={{ width: 0 }}
+              whileInView={{ width: 48 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="h-1 bg-primary" 
+            />
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="text-[10px] font-black tracking-[0.2em] text-on-surface/40 uppercase"
+          >
             {collectionData.items.length} PIECES
-          </div>
+          </motion.div>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
           {collectionData.items.map((product, i) => (
             <motion.div
               key={product.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: i * 0.1, duration: 0.8, ease: "easeOut" }}
             >
               <ProductCard product={product} />
             </motion.div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
-      <section className="mt-32 px-6 max-w-7xl mx-auto">
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="mt-32 px-6 max-w-7xl mx-auto"
+      >
         <div className="bg-on-surface text-surface rounded-[2rem] p-12 md:p-20 overflow-hidden relative group">
           <div className="relative z-10 space-y-8 max-w-xl">
-            <h2 className="font-headline text-4xl md:text-6xl font-black uppercase leading-none tracking-tighter">
-              EXPLORE THE <br /> FULL ARCHIVE
-            </h2>
-            <p className="text-surface/60 text-sm md:text-lg leading-relaxed">
-              Discover our complete range of architectural streetwear, from essential basics to limited edition drops.
-            </p>
-            <Link 
-              to="/products" 
-              className="inline-flex items-center gap-4 bg-primary text-on-primary px-10 py-5 rounded-full font-headline font-black text-xs tracking-widest uppercase hover:brightness-110 transition-all group"
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="font-headline text-4xl md:text-6xl font-black uppercase leading-none tracking-tighter"
             >
-              VIEW ALL PRODUCTS
-              <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-            </Link>
+              EXPLORE THE <br /> FULL ARCHIVE
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="text-surface/60 text-sm md:text-lg leading-relaxed"
+            >
+              Discover our complete range of architectural streetwear, from essential basics to limited edition drops.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.7 }}
+            >
+              <Link 
+                to="/products" 
+                className="inline-flex items-center gap-4 bg-primary text-on-primary px-10 py-5 rounded-full font-headline font-black text-xs tracking-widest uppercase hover:brightness-110 transition-all group"
+              >
+                VIEW ALL PRODUCTS
+                <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+              </Link>
+            </motion.div>
           </div>
           
           {/* Decorative Elements */}
           <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 hidden lg:block">
-            <img 
+            <motion.img 
+              whileHover={{ scale: 1.1, rotate: 2 }}
+              transition={{ duration: 1.5 }}
               src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?q=80&w=1200" 
               className="w-full h-full object-cover grayscale"
               alt="Decorative"
             />
           </div>
-          <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl" />
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.2, 0.3, 0.2]
+            }}
+            transition={{ 
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute -bottom-20 -right-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl" 
+          />
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }
