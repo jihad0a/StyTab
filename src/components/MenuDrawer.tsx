@@ -3,6 +3,8 @@ import { motion } from 'motion/react';
 import { X, Home, ShoppingBag, Zap, Info, Mail, Instagram, Facebook, MessageCircle, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import Logo from './Logo';
+
 interface MenuDrawerProps {
   onClose: () => void;
 }
@@ -34,7 +36,7 @@ export default function MenuDrawer({ onClose }: MenuDrawerProps) {
         className="relative h-full w-[85%] max-w-[400px] bg-surface flex flex-col p-8 shadow-2xl"
       >
         <div className="flex items-center justify-between mb-12">
-          <span className="font-headline text-xl font-bold text-primary tracking-[-0.05em] leading-none uppercase">THE NOIR EDITORIAL</span>
+          <Logo height={28} />
           <button onClick={onClose} className="p-2 -mr-2 text-on-surface/70 hover:text-on-surface transition-colors active:scale-90 duration-150">
             <X size={32} />
           </button>

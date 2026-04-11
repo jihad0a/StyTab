@@ -42,7 +42,7 @@ export default function ProductDetail() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-6 max-w-md mx-auto lg:mx-0"
         >
-          <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-surface-container shadow-xl">
+          <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-surface-container shadow-xl will-change-transform">
             <AnimatePresence mode="wait">
               <motion.img 
                 key={mainImage}
@@ -53,6 +53,8 @@ export default function ProductDetail() {
                 src={mainImage} 
                 alt={product.name} 
                 className="w-full h-full object-cover" 
+                loading="eager"
+                decoding="async"
               />
             </AnimatePresence>
           </div>
@@ -66,9 +68,9 @@ export default function ProductDetail() {
                 onClick={() => setMainImage(img)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`w-20 h-24 flex-shrink-0 rounded-lg border-2 overflow-hidden cursor-pointer transition-all ${mainImage === img ? 'border-primary' : 'border-transparent opacity-60 hover:opacity-100'}`}
+                className={`w-20 h-24 flex-shrink-0 rounded-lg border-2 overflow-hidden cursor-pointer transition-all ${mainImage === img ? 'border-primary' : 'border-transparent opacity-60 hover:opacity-100'} will-change-transform`}
               >
-                <img src={img} className="w-full h-full object-cover" alt="thumbnail" />
+                <img src={img} className="w-full h-full object-cover" alt="thumbnail" loading="lazy" decoding="async" />
               </motion.div>
             ))}
           </div>

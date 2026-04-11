@@ -20,7 +20,18 @@
   }
   body {
     @apply bg-surface text-on-surface font-body;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+}
+
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
 }
 
 .no-scrollbar::-webkit-scrollbar {

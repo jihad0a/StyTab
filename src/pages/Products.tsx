@@ -120,7 +120,7 @@ export default function Products() {
                 setActiveCategory(cat);
                 setVisibleProducts(6);
               }}
-              className={`flex-none px-6 py-2 rounded-full text-[10px] font-black font-headline tracking-widest uppercase transition-all border ${activeCategory === cat ? 'bg-primary border-primary text-on-primary' : 'bg-surface border-on-surface/10 text-on-surface/60 hover:border-primary hover:text-primary'}`}
+              className={`flex-none px-6 py-3 rounded-full text-[10px] font-black font-headline tracking-widest uppercase transition-all border whitespace-nowrap leading-none ${activeCategory === cat ? 'bg-primary border-primary text-on-primary' : 'bg-surface border-on-surface/10 text-on-surface/60 hover:border-primary hover:text-primary'}`}
             >
               {cat}
             </motion.button>
@@ -161,6 +161,7 @@ export default function Products() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
+                className="will-change-transform"
               >
                 <ProductCard product={product} />
               </motion.div>

@@ -8,6 +8,8 @@ import CartDrawer from './CartDrawer';
 import MenuDrawer from './MenuDrawer';
 import WishlistDrawer from './WishlistDrawer';
 
+import Logo from './Logo';
+
 export default function Navbar() {
   const { totalItems } = useCart();
   const { wishlist } = useWishlist();
@@ -35,8 +37,8 @@ export default function Navbar() {
           </motion.button>
         </div>
         
-        <Link to="/" className="text-2xl font-black text-on-surface tracking-[-0.05em] font-headline uppercase">
-          StyTab
+        <Link to="/" className="flex items-center justify-center">
+          <Logo height={32} className="hover:scale-105 transition-transform duration-300" />
         </Link>
 
         <div className="flex items-center gap-4">
@@ -44,13 +46,14 @@ export default function Navbar() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsWishlistOpen(true)}
-            className="relative text-on-surface/70 hover:text-primary transition-all duration-300 cursor-pointer group"
+            className="relative text-on-surface/70 hover:text-primary transition-all duration-300 cursor-pointer group will-change-transform"
           >
             <motion.div
               key={wishlist.length}
               initial={{ scale: 1 }}
               animate={{ scale: [1, 1.4, 1] }}
               transition={{ duration: 0.3 }}
+              className="will-change-transform"
             >
               <Heart size={24} className={wishlist.length > 0 ? 'text-primary' : ''} fill={wishlist.length > 0 ? 'currentColor' : 'none'} />
             </motion.div>
@@ -58,7 +61,7 @@ export default function Navbar() {
               <motion.span 
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="absolute -top-1 -right-1 bg-primary text-on-primary text-[8px] font-bold w-3 h-3 flex items-center justify-center rounded-full"
+                className="absolute -top-1 -right-1 bg-primary text-on-primary text-[8px] font-bold w-3 h-3 flex items-center justify-center rounded-full will-change-transform"
               >
                 {wishlist.length}
               </motion.span>
@@ -68,13 +71,14 @@ export default function Navbar() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsCartOpen(true)}
-            className="relative duration-150 cursor-pointer group"
+            className="relative duration-150 cursor-pointer group will-change-transform"
           >
             <motion.div
               key={totalItems}
               initial={{ scale: 1 }}
               animate={{ scale: [1, 1.4, 1] }}
               transition={{ duration: 0.3 }}
+              className="will-change-transform"
             >
               <ShoppingCart size={24} className="text-on-surface/70 group-hover:text-primary" />
             </motion.div>
@@ -82,7 +86,7 @@ export default function Navbar() {
               <motion.span 
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="absolute -top-2 -right-2 bg-primary text-on-primary text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
+                className="absolute -top-2 -right-2 bg-primary text-on-primary text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full will-change-transform"
               >
                 {totalItems}
               </motion.span>

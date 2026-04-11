@@ -2,6 +2,8 @@ import { Instagram, Facebook, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 
+import Logo from './Logo';
+
 export default function Footer() {
   return (
     <footer className="bg-surface pt-20 pb-10 px-6 border-t border-on-surface/5">
@@ -13,7 +15,7 @@ export default function Footer() {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="text-4xl font-black text-on-surface tracking-[-0.05em] font-headline uppercase">StyTab</div>
+            <Logo height={40} className="-ml-2" />
             <div className="space-y-4">
               <h4 className="font-headline font-bold text-xs tracking-widest text-on-surface uppercase">STAY IN THE DROP</h4>
               <p className="text-on-surface/60 text-sm">Access to exclusive releases and editorial content.</p>

@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <div className="pt-[60px]">
       {/* Hero Slider */}
-      <section className="relative h-[85vh] w-full overflow-hidden">
+      <section className="relative h-[85vh] w-full overflow-hidden will-change-transform">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -86,10 +86,10 @@ export default function Home() {
             transition={{ delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-3 pt-4"
           >
-            <Link to="/products" className="bg-primary text-on-primary px-8 py-4 sm:py-3 rounded-full text-center font-headline font-bold text-xs tracking-wider uppercase transition-all hover:brightness-110 active:scale-95 shadow-lg">
+            <Link to="/products" className="bg-primary text-on-primary px-8 py-3.5 sm:py-3 rounded-full text-center font-headline font-bold text-xs tracking-wider uppercase transition-all hover:brightness-110 active:scale-95 shadow-lg">
               SHOP NOW
             </Link>
-            <Link to="/about" className="bg-black text-white px-6 py-4 sm:py-3 rounded-full text-center font-headline font-bold text-xs tracking-wider uppercase transition-all hover:bg-black/80 active:scale-95 shadow-lg">
+            <Link to="/about" className="bg-black text-white px-6 py-3.5 sm:py-3 rounded-full text-center font-headline font-bold text-xs tracking-wider uppercase transition-all hover:bg-black/80 active:scale-95 shadow-lg">
               VIEW LOOKBOOK
             </Link>
           </motion.div>
@@ -107,8 +107,8 @@ export default function Home() {
       </section>
 
       {/* Marquee */}
-      <section className="bg-primary py-3 overflow-hidden whitespace-nowrap">
-        <div className="animate-marquee gap-8 items-center">
+      <section className="bg-primary py-3 overflow-hidden whitespace-nowrap will-change-transform">
+        <div className="animate-marquee gap-8 items-center will-change-transform">
           <span className="font-headline font-black text-on-primary text-xs tracking-widest uppercase">
             FREE DELIVERY ON ALL ORDERS • NEW COLLECTION AVAILABLE • PREMIUM DROP SHOULDER FITS • FREE DELIVERY ON ALL ORDERS • NEW COLLECTION AVAILABLE • PREMIUM DROP SHOULDER FITS
           </span>
@@ -131,10 +131,11 @@ export default function Home() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
+              className="flex-none"
             >
               <Link 
                 to={`/products?category=${cat}`}
-                className={`flex-none px-6 py-2 rounded-full text-xs font-bold font-headline tracking-widest uppercase transition-all border border-on-surface/10 text-on-surface/70 hover:border-primary hover:text-primary hover:bg-primary/5`}
+                className="inline-block px-6 py-2.5 rounded-full text-[10px] font-bold font-headline tracking-widest uppercase transition-all border border-on-surface/10 text-on-surface/70 hover:border-primary hover:text-primary hover:bg-primary/5 whitespace-nowrap leading-none"
               >
                 {cat}
               </Link>
@@ -157,14 +158,22 @@ export default function Home() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative"
           >
-            <h2 className="font-headline text-3xl font-black text-on-surface tracking-tighter uppercase">BEST SELLERS</h2>
+            <h2 className="font-headline text-3xl font-black text-on-surface tracking-tighter uppercase relative z-10">BEST SELLERS</h2>
             <motion.div 
               initial={{ width: 0 }}
-              whileInView={{ width: 48 }}
+              whileInView={{ width: '100%' }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="h-1 bg-primary mt-2" 
+              className="absolute -bottom-1 left-0 h-3 bg-primary/20 -rotate-1 origin-left" 
+            />
+            <motion.div 
+              initial={{ width: 0 }}
+              whileInView={{ width: 40 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+              className="h-1 bg-primary mt-1" 
             />
           </motion.div>
           <Link to="/collection?filter=best-seller" className="text-[10px] font-black tracking-[0.2em] uppercase text-on-surface/40 hover:text-primary transition-colors">
@@ -242,13 +251,15 @@ export default function Home() {
             transition={{ duration: 1.2, ease: "easeOut" }}
             className="relative mt-8 lg:mt-0"
           >
-            <div className="aspect-square bg-surface-container rounded-3xl overflow-hidden shadow-2xl">
+            <div className="aspect-square bg-surface-container rounded-3xl overflow-hidden shadow-2xl will-change-transform">
               <motion.img 
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.8 }}
                 src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?q=80&w=1200&auto=format&fit=crop" 
                 alt="Brand Story" 
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <motion.div 

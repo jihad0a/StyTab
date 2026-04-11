@@ -66,11 +66,13 @@ export default function Collection() {
               {collectionData.description}
             </motion.p>
           </div>
-          <div className="flex-1 w-full aspect-[4/5] md:aspect-square rounded-3xl overflow-hidden bg-surface-container relative group">
+          <div className="flex-1 w-full aspect-[4/5] md:aspect-square rounded-3xl overflow-hidden bg-surface-container relative group will-change-transform">
             <img 
               src={collectionData.items[0]?.image || 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=1200'} 
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
               alt="Collection Hero"
+              loading="eager"
+              decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent opacity-60" />
             <div className="absolute bottom-8 left-8 right-8">
@@ -177,13 +179,15 @@ export default function Collection() {
           </div>
           
           {/* Decorative Elements */}
-          <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 hidden lg:block">
+          <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 hidden lg:block will-change-transform">
             <motion.img 
               whileHover={{ scale: 1.1, rotate: 2 }}
               transition={{ duration: 1.5 }}
               src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?q=80&w=1200" 
               className="w-full h-full object-cover grayscale"
               alt="Decorative"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <motion.div 
