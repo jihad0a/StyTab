@@ -6,7 +6,7 @@ import Logo from './Logo';
 
 export default function Footer() {
   return (
-    <footer className="bg-surface pt-20 pb-10 px-6 border-t border-on-surface/5">
+    <footer className="bg-surface text-on-surface pt-20 pb-10 px-6 border-t border-on-surface/5">
       <div className="max-w-7xl mx-auto space-y-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <motion.div 
@@ -15,7 +15,7 @@ export default function Footer() {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <Logo height={40} className="-ml-2" />
+            <Logo height={48} className="-ml-2" />
             <div className="space-y-4">
               <h4 className="font-headline font-bold text-xs tracking-widest text-on-surface uppercase">STAY IN THE DROP</h4>
               <p className="text-on-surface/60 text-sm">Access to exclusive releases and editorial content.</p>
