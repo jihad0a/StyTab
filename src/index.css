@@ -7,11 +7,11 @@
 
   --color-primary: #F59E0B;
   --color-on-primary: #2A1700;
-  --color-surface: #bdbbbb;
+  --color-surface: #f5f5f5;
   --color-on-surface: #131313;
-  --color-surface-container: #b0aeae;
-  --color-surface-container-low: #c7c5c5;
-  --color-surface-container-high: #a6a4a4;
+  --color-surface-container: #ebebeb;
+  --color-surface-container-low: #fafafa;
+  --color-surface-container-high: #e0e0e0;
 }
 
 @layer base {
