@@ -16,7 +16,7 @@ export default function Footer() {
             className="space-y-8"
           >
             <div className="h-10 md:h-12">
-              <Logo className="h-full -ml-2 drop-shadow-[0_2px_8px_rgba(255,255,255,0.2)]" />
+              <Logo className="h-full -ml-2" />
             </div>
             <div className="space-y-4">
               <h4 className="font-headline font-bold text-xs tracking-widest text-on-surface uppercase">STAY IN THE DROP</h4>

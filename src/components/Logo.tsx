@@ -1,5 +1,4 @@
 import React from 'react';
-import logoUrl from '../../logo.png';
 
 interface LogoProps {
   className?: string;
@@ -9,10 +8,10 @@ interface LogoProps {
 export default function Logo({ className = "", height }: LogoProps) {
   return (
     <img 
-      src={logoUrl} 
+      src="/logo.png" 
       alt="StyTab Logo" 
-      style={height ? { height: `${height}px`, imageRendering: 'auto' } : { imageRendering: 'auto' }}
-      className={`select-none object-contain w-auto block h-full antialiased ${className}`}
+      style={height ? { height: `${height}px` } : undefined}
+      className={`select-none object-contain w-auto block h-full ${className}`}
       referrerPolicy="no-referrer"
       loading="eager"
     />

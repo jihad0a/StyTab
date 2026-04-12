@@ -37,8 +37,8 @@ export default function Navbar() {
           </motion.button>
         </div>
         
-        <Link to="/" className="flex items-center justify-center h-8 md:h-10">
-          <Logo className="h-full hover:scale-105 transition-transform duration-300 drop-shadow-[0_2px_8px_rgba(255,255,255,0.2)]" />
+        <Link to="/" className="flex items-center justify-center h-10 md:h-12">
+          <Logo className="h-full hover:scale-105 transition-transform duration-300" />
         </Link>
 
         <div className="flex items-center gap-4">
