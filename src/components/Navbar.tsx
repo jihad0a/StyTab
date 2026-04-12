@@ -25,7 +25,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 z-50 w-full h-[60px] flex justify-between items-center px-6 bg-surface/80 backdrop-blur-xl border-b border-on-surface/10 shadow-sm">
+      <header className="fixed top-0 z-50 w-full h-[60px] flex justify-between items-center px-6 bg-surface/90 backdrop-blur-md border-b border-on-surface/5 shadow-sm">
         <div className="flex items-center gap-4">
           <motion.button 
             whileHover={{ scale: 1.1 }}
@@ -37,8 +37,8 @@ export default function Navbar() {
           </motion.button>
         </div>
         
-        <Link to="/" className="flex items-center justify-center">
-          <Logo height={56} className="hover:scale-105 transition-transform duration-300" />
+        <Link to="/" className="flex items-center justify-center h-8 md:h-10">
+          <Logo className="h-full hover:scale-105 transition-transform duration-300 drop-shadow-[0_2px_8px_rgba(255,255,255,0.2)]" />
         </Link>
 
         <div className="flex items-center gap-4">
